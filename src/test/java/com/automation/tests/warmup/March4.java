@@ -1,10 +1,12 @@
 package com.automation.tests.warmup;
 
 import com.automation.utilities.DriverFactory;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
 
 import java.util.Arrays;
 
@@ -12,8 +14,8 @@ public class March4 {
     static WebDriver driver;
 
     public static void main(String[] args) throws Exception{
-       ebayTest();
-//        amazonTest();
+      ebayTest();
+ //       amazonTest();
 //        wikiTest();
     }
 
@@ -24,7 +26,7 @@ public class March4 {
      * print number of results
      */
     public static void ebayTest() throws Exception {
-        WebDriver driver = DriverFactory.createDriver("chrome");
+        driver = DriverFactory.createDriver("chrome");
         //Go to ebay
         driver.get("http://ebay.com");
 
@@ -57,8 +59,10 @@ public class March4 {
      * verify title contains search term
      */
     public static void amazonTest() throws Exception{
-        driver = DriverFactory.createDriver("chrome");
+       // driver = DriverFactory.createDriver("edge");
         //go to amazon
+        WebDriverManager.edgedriver().setup();
+        driver=new EdgeDriver();
         driver.get("http://amazon.com");
         //enter search term + click on search button
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("java book", Keys.ENTER);
