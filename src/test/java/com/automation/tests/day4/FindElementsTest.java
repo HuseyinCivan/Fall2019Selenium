@@ -25,7 +25,6 @@ public class FindElementsTest {
             System.out.println(link.getAttribute("href"));
             System.out.println();
 
-
         }
 
         for(int x=1; x< links.size();x++){
@@ -37,11 +36,6 @@ public class FindElementsTest {
             links=driver.findElements(By.tagName("a"));
 
         }
-
-
-
-
-
 
 
         driver.quit();

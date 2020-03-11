@@ -1,4 +1,4 @@
-package com.automation.tests.warmup;
+package com.automation.tests.amazon;
 
 public class AmazonTest {
     public static void main(String[] args) {

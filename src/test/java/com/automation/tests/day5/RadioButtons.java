@@ -27,6 +27,16 @@ public class RadioButtons {
             //to check if button can be clicked
 
             String id= radiButton.getAttribute("id");
+
+            //return true if button alredy clicked
+            boolean isSelected = radiButton.isSelected();
+            System.out.println(id+" is selected ? "+isSelected);
+
+
+
+
+            //if button is eligible to click
+            //returns true of you can click on the button
             if(radiButton.isEnabled()){
 
                 radiButton.click();
@@ -35,7 +45,7 @@ public class RadioButtons {
             }else {
                 System.out.println("Button is disabled, not clicked :"+id);
             }
-
+            System.out.println();
         }
 
 
