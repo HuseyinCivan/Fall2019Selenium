@@ -24,6 +24,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 public class CalendarEventsPageTests {
     private By usernameBy = By.id("prependedInput");
     private By passwordBy=By.id("prependedInput2");
@@ -101,23 +106,18 @@ public class CalendarEventsPageTests {
         WebElement titleElement=driver.findElement(titleBy);
         Assert.assertTrue(titleElement.getAttribute("value").isEmpty());
 
+        //date time syntax = https://www.journaldev.com/17899/java-simpledateformat-java-date-format
+        String expectedDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
+        String actualDate = driver.findElement(startDateBy).getAttribute("value");
 
+        Assert.assertEquals(actualDate,expectedDate);
 
+        String expectedTime= LocalTime.now(ZoneId.of("GMT-7")).format(DateTimeFormatter.ofPattern("h:m a"));
+        String actualTime=driver.findElement(startTimeBy).getAttribute("value");
 
-
-
-
+        Assert.assertEquals(actualTime,expectedTime);
 
     }
-
-
-
-
-
-
-
-
-
 
     @AfterMethod
     public void teardown(){

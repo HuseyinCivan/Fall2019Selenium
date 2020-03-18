@@ -20,6 +20,12 @@ public class Test_Case_6 {
     private By submitBy=By.name("wooden_spoon");
     private By messageBy=By.name("signup_message");
     private By emailDoNotReplyBy=By.xpath("//tbody//tr[1]//td//span[@class=\"glyphicon glyphicon-envelope\"]");
+    private By eMailFromBy=By.id("odesilatel");
+    private By subjectBy=By.id("predmet");
+
+
+
+
 
 
  @Test
@@ -43,9 +49,29 @@ public class Test_Case_6 {
      driver.navigate().to(URLMail);
      driver.navigate().refresh();
      BrowserUtils.wait(3);
-     System.out.println(driver.findElement(emailDoNotReplyBy).getText());
 
-     driver.findElement(emailDoNotReplyBy).click();
+
+      driver.findElement(emailDoNotReplyBy).click();
+
+      String actualMailFrom=driver.findElement(eMailFromBy).getText();
+      String expectedMailFrom="do-not-reply@practice.cybertekschool.com";
+
+      Assert.assertEquals(actualMailFrom,expectedMailFrom);
+
+      String actualSubjectBy=driver.findElement(subjectBy).getText();
+      String expectedSubject="Thanks for subscribing to practice.cybertekschool.com!";
+
+      Assert.assertEquals(actualSubjectBy,expectedSubject);
+
+      driver.quit();
+
+
+
+
+
+
+
+
 
 
 
