@@ -15,7 +15,7 @@ import java.util.List;
 public class AmazonTest3 {
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        List<String> asins = Files.readAllLines(Paths.get("C:\\Users\\h_civ\\IdeaProjects\\Fall2019Selenium\\src\\test\\java\\com\\automation\\tests\\amazon\\asin_TEST_available"));
+        List<String> asins = Files.readAllLines(Paths.get("C:\\Users\\h_civ\\IdeaProjects\\Fall2019Selenium\\src\\test\\java\\com\\automation\\tests\\amazon\\appliances_test.txt"));
         System.out.println("asins = " + asins);
 
         WebDriverManager.chromedriver().version("79").setup();

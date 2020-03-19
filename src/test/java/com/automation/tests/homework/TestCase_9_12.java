@@ -20,7 +20,7 @@ public class TestCase_9_12 {
     private By statusMessageBy=By.cssSelector("#content>div>p");
     private By hereBy=By.linkText("here");
 
-    @BeforeTest
+    @BeforeMethod
     public void setup(){
         WebDriverManager.chromedriver().version("79").setup();
         driver=new ChromeDriver();
@@ -29,7 +29,7 @@ public class TestCase_9_12 {
         driver.findElement(statusCodeBy).click();
 
     }
-    @AfterTest
+    @AfterMethod
     public void teardown(){
         if(driver!=null){
             driver.quit();
@@ -37,38 +37,62 @@ public class TestCase_9_12 {
         }
     }
 
-    @Test(priority = 1)
-    public void testCase_9(){
-        driver.findElement(code200By).click();
-        String actual=driver.findElement(statusMessageBy).getText();
-        String expected="This page returned a 200 status code.";
-        Assert.assertTrue(actual.contains(expected));
-        driver.findElement(hereBy).click();
 
+    @DataProvider(name="testCase_9_12")
+    public Object[][] data_TestCase_9_12(){
+        return new Object[][]{  {code200By,"This page returned a 200 status code."},
+                                {code301By,"This page returned a 301 status code."},
+                                {code404By,"This page returned a 404 status code."},
+                                {code500By,"This page returned a 500 status code."}
+
+        };
     }
-    @Test(priority = 2)
-    public void testCase_10(){
-        driver.findElement(code301By).click();
+
+
+    @Test(dataProvider="testCase_9_12")
+    public void testCase_9_12(By codeBy,String expected){
+        driver.findElement(codeBy).click();
         String actual=driver.findElement(statusMessageBy).getText();
-        String expected="This page returned a 301 status code.";
-        Assert.assertTrue(actual.contains(expected));
-        driver.findElement(hereBy).click();
-    }
-    @Test(priority = 3)
-    public void testCase_11(){
-        driver.findElement(code404By).click();
-        String actual=driver.findElement(statusMessageBy).getText();
-        String expected="This page returned a 404 status code.";
-        Assert.assertTrue(actual.contains(expected));
-        driver.findElement(hereBy).click();
-    }
-    @Test(priority = 4)
-    public void testCase_12(){
-        driver.findElement(code500By).click();
-        String actual=driver.findElement(statusMessageBy).getText();
-        String expected="This page returned a 500 status code.";
         Assert.assertTrue(actual.contains(expected));
 
     }
+
+
+
+
+
+//    @Test(priority = 1)
+//    public void testCase_9(){
+//        driver.findElement(code200By).click();
+//        String actual=driver.findElement(statusMessageBy).getText();
+//        String expected="This page returned a 200 status code.";
+//        Assert.assertTrue(actual.contains(expected));
+//
+//
+//    }
+//    @Test(priority = 2)
+//    public void testCase_10(){
+//        driver.findElement(code301By).click();
+//        String actual=driver.findElement(statusMessageBy).getText();
+//        String expected="This page returned a 301 status code.";
+//        Assert.assertTrue(actual.contains(expected));
+//
+//    }
+//    @Test(priority = 3)
+//    public void testCase_11(){
+//        driver.findElement(code404By).click();
+//        String actual=driver.findElement(statusMessageBy).getText();
+//        String expected="This page returned a 404 status code.";
+//        Assert.assertTrue(actual.contains(expected));
+//
+//    }
+//    @Test(priority = 4)
+//    public void testCase_12(){
+//        driver.findElement(code500By).click();
+//        String actual=driver.findElement(statusMessageBy).getText();
+//        String expected="This page returned a 500 status code.";
+//        Assert.assertTrue(actual.contains(expected));
+//
+//    }
 
 }
