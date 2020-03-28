@@ -121,7 +121,7 @@ public class CalendarEventsPageTests {
 
     @AfterMethod
     public void teardown(){
-        driver.quit();
+      //  driver.quit();
     }
 
 //Test Case: Default options
@@ -132,8 +132,5 @@ public class CalendarEventsPageTests {
 //Default title should be blank
 //Default start date should be current date
 //Default start time should be current time
-
-
-
 
 }
