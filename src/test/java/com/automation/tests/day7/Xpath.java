@@ -4,6 +4,8 @@ import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Xpath {
 
@@ -16,6 +18,7 @@ public class Xpath {
     public static void main(String[] args) {
 
 
+        WebDriver drv = new ChromeDriver();
         WebDriver driver= DriverFactory.createDriver("chrome");
         driver.get("http://practice.cybertekschool.com/login");
 

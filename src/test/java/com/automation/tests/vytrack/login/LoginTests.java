@@ -16,13 +16,13 @@ import org.testng.annotations.Test;
 //STATIC IMPORT OF ALL ASSERTIONS
 import static org.testng.Assert.*;
 
-public class LoginPageTests {
+public class LoginTests {
     private WebDriver driver;
     //https is a secure version of http protocol
     //http - it's hypertext tansfer protocol that every single website is using nowadays
     //https - data encripted, no chance for hackers to retrive info
     //http - data as a plane text, very easy to hack it
-    private String URL="https://qa2.vytrack.com/user/login";
+    private String URL="https://qa1.vytrack.com/user/login";
     // CREDENTIALS FOR store manager
     private String username = "storemanager85";
     private String password = "UserUser123";

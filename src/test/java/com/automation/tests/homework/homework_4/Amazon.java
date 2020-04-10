@@ -47,6 +47,7 @@ public class Amazon {
 
             if(value.compareTo(nextValue)>0){
                 System.out.println("TEST PASSED");
+
                 break;
             }
         }
@@ -56,29 +57,29 @@ public class Amazon {
     public void mainDepartments(){
         driver.get("https://www.amazon.com/gp/site-directory");
         List<WebElement> mainDepartments = driver.findElements(By.cssSelector("[class=\"fsdDeptTitle\"]"));
-//    for (int x = 0; x <mainDepartments.size() ; x++) {
-//
-//        System.out.println(mainDepartments.get(x).getText());
-//
-//    }
+    for (int x = 0; x <mainDepartments.size() ; x++) {
+
+        System.out.println(mainDepartments.get(x).getText());
+
+    }
 
     List<WebElement> departmentDropDownMenu = driver.findElements(By.cssSelector("[aria-describedby=\"searchDropdownDescription\"]>option"));
 
     List<String> allDepartmentsOnDropdownMenu = new ArrayList<>();
     for (int i = 0; i <departmentDropDownMenu.size() ; i++) {
-       // System.out.println(departmentDropDownMenu.get(i).getText());
+        System.out.println(departmentDropDownMenu.get(i).getText());
         allDepartmentsOnDropdownMenu.add(departmentDropDownMenu.get(i).getText());
 
     }
 
     for (int y = 0; y < mainDepartments.size() ; y++) {
 
-        //belows are not on dropdown menu !
-//        if(!allDepartmentsOnDropdownMenu.contains(mainDepartments.get(y).getText())){
-//            System.out.print(mainDepartments.get(y).getText());
-//            System.out.println(" --> Test Failed ! ");
-//        }
-        Assert.assertTrue(departmentDropDownMenu.contains(mainDepartments.get(y)));
+      //  belows are not on dropdown menu !
+        if(!allDepartmentsOnDropdownMenu.contains(mainDepartments.get(y).getText())){
+            System.out.print(mainDepartments.get(y).getText());
+            System.out.println(" --> Test Failed ! ");
+        }
+        //Assert.assertTrue(departmentDropDownMenu.contains(mainDepartments.get(y)));
 
     }
 
@@ -98,7 +99,8 @@ public class Amazon {
 //        System.out.println(searchResults.get(x).getText());
 //    }
     for (int i = 0; i <10 ; i++) {
-        List<WebElement> searchResults = driver.findElements(By.xpath("//div[contains(@data-asin,\"B\")]//span[@class=\"a-size-base-plus a-color-base a-text-normal\"]"));
+        List<WebElement> searchResults =
+                driver.findElements(By.xpath("//div[contains(@data-asin,\"B\")]//span[@class=\"a-size-base-plus a-color-base a-text-normal\"]"));
 
         Random random = new Random();
         int indexOfSearchReasult = random.nextInt(searchResults.size());
@@ -192,6 +194,5 @@ public class Amazon {
     // Assert.assertTrue(   fullPrice < 25   );
 
    }
-
 }
 }
