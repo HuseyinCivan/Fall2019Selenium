@@ -15,22 +15,21 @@ public class ImplicitWait {
 
     @BeforeMethod
     public void setup(){
-        driver= DriverFactory.createDriver("chrome");
+        driver = DriverFactory.createDriver("chrome");
         driver.get("http://practice.cybertekschool.com/dynamic_loading/2");
+        //this is how we apply implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
-@AfterMethod
+
+    @AfterMethod
     public void teardown(){
         driver.quit();
+    }
 
-}
-
-@Test
+    @Test
     public void waitTest(){
         driver.findElement(By.tagName("button")).click();
-    WebElement finishElement = driver.findElement(By.id("finish"));
-    System.out.println(finishElement.getText());
-}
-
-
+        WebElement finishElement = driver.findElement(By.id("finish"));
+        System.out.println(finishElement.getText());
+    }
 }

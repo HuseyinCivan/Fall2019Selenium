@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,69 +20,61 @@ public class WebOrders {
     private WebDriverWait wait;
 
     @BeforeMethod
-    public void setup(){
+    public void setup() {
         driver = DriverFactory.createDriver("chrome");
-        wait=new WebDriverWait(driver,10);
+        wait = new WebDriverWait(driver, 10);
         driver.get("http://secure.smartbearsoftware.com/samples/testcomplete12/weborders");
         driver.findElement(By.id("ctl00_MainContent_username")).sendKeys("Tester");
         driver.findElement(By.id("ctl00_MainContent_password")).sendKeys("test", Keys.ENTER);
     }
-    @AfterMethod
-    public void teardown(){
-        BrowserUtils.wait(2);
-        driver.quit();
-    }
 
-
+    /**
+     * 7 minutes until 5:21
+     * Go to web orders page
+     * Click on "Check All" button
+     * Verify that all records are selected
+     */
     @Test
-    public void checkBoxTest(){
-
-        WebElement checkAllBtn=driver.findElement(By.id("ctl00_MainContent_btnCheckAll"));
-        checkAllBtn.click();
-        List<WebElement> checkButtons = driver.findElements(By.cssSelector("[type=\"checkbox\"]"));
-
-//        boolean allSelected=false;
-
-//        for (WebElement checkButton : checkButtons) {
-//            allSelected=checkButton.isSelected();
-//            if(allSelected==false){
-//                break;
-//            }
-//        }
-
-//        Assert.assertTrue(allSelected=true);
-
-        for (WebElement checkButton : checkButtons) {
-            Assert.assertTrue(checkButton.isSelected());
+    public void checkBoxTest() {
+        driver.findElement(By.id("ctl00_MainContent_btnCheckAll")).click();
+        BrowserUtils.wait(2);
+        List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
+        for (WebElement checkbox : checkboxes) {
+            Assert.assertTrue(checkbox.isSelected());
         }
     }
 
+    /**
+     * until 5:37
+     * :: TASK for 10 minutes ::
+     * Go to web orders page
+     * Verify that Steve Johns zip code is 21233
+     * Then update his zip code to 20002
+     * Then verify that Steve Johns zip code is 20002
+     */
     @Test
     public void updateZipCode(){
+        WebElement zipcode = driver.findElement(By.xpath("//td[text()='Steve Johns']//following-sibling::td[7]"));
+        Assert.assertEquals(zipcode.getText(), "21233");
 
-        String actual=driver.findElement(By.xpath("//*[text()=\"Steve Johns\"]/following-sibling::td[7]")).getText();
+        //click on update image
 
-        Assert.assertEquals(actual,"21233");
+        driver.findElement(By.xpath("//td[text()='Steve Johns']//following-sibling::td/input")).click();
 
-        WebElement updateBtn = driver.findElement(By.xpath("//*[text()=\"Steve Johns\"]/following-sibling::td[11]"));
-        updateBtn.click();
+        WebElement zipcodeInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox5"));
 
-        WebElement zipCode=driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox5"));
-        zipCode.clear();
-        zipCode.sendKeys("20002");
+        zipcodeInput.clear();
+        zipcodeInput.sendKeys("20002");
 
-        WebElement update2Btn=driver.findElement(By.id("ctl00_MainContent_fmwOrder_UpdateButton"));
-        update2Btn.click();
+        driver.findElement(By.id("ctl00_MainContent_fmwOrder_UpdateButton")).click();
 
-        actual=driver.findElement(By.xpath("//*[text()=\"Steve Johns\"]/following-sibling::td[7]")).getText();
-        Assert.assertEquals(actual,"20002");
-
-
-
+        zipcode = driver.findElement(By.xpath("//td[text()='Steve Johns']//following-sibling::td[7]"));
+        Assert.assertEquals(zipcode.getText(), "20002");
     }
 
-
-
-
-
+    @AfterMethod
+    public void teardown() {
+        BrowserUtils.wait(2);
+        driver.quit();
+    }
 }

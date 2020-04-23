@@ -9,47 +9,43 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 
 public class VerifyThatElementIsGone {
+
     /**
-     * Interview questions
+     * Interview question:
      *
-     * how to check if elements doesn't exists any more in DOM ( document oblect Model
+     * how to check if element doesn't exists any more in th DOM (Document Object Model (that HTML code))
      *
-     * @param args
      */
-    public static void main(String[] args) throws InterruptedException {
-
+    public static void main(String[] args) throws Exception{
         WebDriverManager.chromedriver().version("79").setup();
-        WebDriver driver=new ChromeDriver();
-
+        WebDriver driver = new ChromeDriver();
         driver.get("http://practice.cybertekschool.com/multiple_buttons");
         Thread.sleep(2000);
 
         driver.findElement(By.id("disappearing_button")).click();
         Thread.sleep(2000);
 
-        if(driver.findElements(By.id("disappearing_button")).size()==0){  //.isEmpty
-            System.out.println("TEST PASSED !");
-        }else{
-            System.out.println("TEST FAILED !");
-        }
-        Thread.sleep(2000);
+        List<WebElement> list = driver.findElements(By.id("disappearing_button"));
 
+        //if size is 0, that means no elements were found
+        if(list.size() == 0){
+            System.out.println("TEST PASSED");
+        }else {
+            System.out.println("TEST FAILED");
+        }
+
+        Thread.sleep(2000);
         //to find all buttons
-        //make sure that you use findElements <-- ending is important
+        //make sure that you us findElements <--- ending is important
         List<WebElement> buttons = driver.findElements(By.tagName("button"));
 
-        for(WebElement button : buttons){
+        for(WebElement button: buttons){
             //click on every button
             button.click();
             Thread.sleep(2000);
-
         }
 
         driver.quit();
 
-
-
-
     }
-
 }

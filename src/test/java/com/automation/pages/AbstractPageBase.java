@@ -13,22 +13,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * This class will be extended by page classes
- * any common webelement / locators can be stored here
- * since navigation menu does't belong to particular page
- * we cannot really create a dedicated page class to store
+ * Ant common webelements/locators can be stored here
+ * Since navigation menu doesn't belong to particular page
+ * We cannot really create a dedicated page class to store
  * elements from that menu
  */
 public abstract class AbstractPageBase {
+    protected WebDriver driver = Driver.getDriver();
+    protected WebDriverWait wait = new WebDriverWait(driver, 25);
 
-    protected WebDriver driver=Driver.getDriver();
-    protected WebDriverWait wait = new WebDriverWait(driver,15);
-
-    @FindBy(css = "#user-menu>a")
+    @FindBy(css = "#user-menu > a")
     protected WebElement currentUser;
 
-    public AbstractPageBase(){
-        PageFactory.initElements(driver,this);
+    public AbstractPageBase() {
+        PageFactory.initElements(driver, this);
     }
+
 
     public String getCurrentUserName(){
         BrowserUtils.waitForPageToLoad(10);
@@ -36,13 +36,14 @@ public abstract class AbstractPageBase {
         return currentUser.getText().trim();
     }
 
+
     /**
      * Method for vytrack navigation. Provide tab name and module name to navigate
-     * @param tabName , like Dashboards, Fleet, Customers
-     * @param moduleName , like Vehicles, Vehicles Odometer and Vehicles Costs
+     * @param tabName, like Dashboards, Fleet or Customers
+     * @param moduleName, like Vehicles, Vehicles Odometer and Vehicles Costs
      */
-    public void navigateTo(String tabName, String moduleName){
-        String tabNameXpath = "//span[@class='title title-level-1' and contains(text(),'"+tabName+"')]";
+    public void navigateTo(String tabName, String moduleName) {
+        String tabNameXpath = "//span[@class='title title-level-1' and contains(text(),'" + tabName + "')]";
         String moduleXpath = "//span[@class='title title-level-2' and text()='" + moduleName + "']";
 
         WebElement tabElement = driver.findElement(By.xpath(tabNameXpath));
@@ -52,9 +53,12 @@ public abstract class AbstractPageBase {
 
         BrowserUtils.wait(4);
 
-        actions.moveToElement(tabElement).pause(2000).click(moduleElement).build().perform();
+        actions.moveToElement(tabElement).
+                pause(2000).
+                click(moduleElement).
+                build().perform();
 
+        //increase this wait rime if still failing
         BrowserUtils.wait(4);
     }
-
 }

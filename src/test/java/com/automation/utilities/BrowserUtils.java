@@ -16,17 +16,18 @@ import java.util.Date;
 import java.util.List;
 
 public class BrowserUtils {
-    public static void main(String[] args) {
-        System.out.println("System.getProperty(\"os.name\") = " + System.getProperty("os.name"));
-    }
 
+    /**
+     * Pause test for some time
+     *
+     * @param seconds
+     */
     public static void wait(int seconds) {
         try {
             Thread.sleep(1000 * seconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -86,11 +87,13 @@ public class BrowserUtils {
         name = new Date().toString().replace(" ", "_").replace(":", "-") + "_" + name;
         //where we gonna store a screenshot
         String path = "";
+
         if (System.getProperty("os.name").toLowerCase().contains("mac")) {
             path = System.getProperty("user.dir") + "/test-output/screenshots/" + name + ".png";
         } else {
             path = System.getProperty("user.dir") + "\\test-output\\screenshots\\" + name + ".png";
         }
+
         System.out.println("OS name: " + System.getProperty("os.name"));
         System.out.println("Screenshot is here: " + path);
         //since our reference type is a WebDriver

@@ -3,7 +3,6 @@ package com.automation.tests.vytrack.activities;
 import com.automation.pages.LoginPage;
 import com.automation.pages.activities.CalendarEventsPage;
 import com.automation.tests.vytrack.AbstractTestBase;
-import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.DateTimeUtilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -131,8 +130,8 @@ public class NewCalendarEventsTests extends AbstractTestBase {
         calendarEventsPage.clickOnSaveAndClose();
 
         //verify that calendar event info is correct
-        Assert.assertEquals(calendarEventsPage.getGeneralInfoDescription(), description);
-        Assert.assertEquals(calendarEventsPage.getGeneralInfoTitle(), title);
+        Assert.assertEquals(calendarEventsPage.getGeneralInfoDescriptionText(), description);
+        Assert.assertEquals(calendarEventsPage.getGeneralInfoTitleText(), title);
 
         //for extent report. specify that test passed in report (if all assertions passed)
         test.pass("Calendar event was created successfully!");

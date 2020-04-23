@@ -37,13 +37,10 @@ public class JSExecutor {
 //        JavascriptExecutor js = (JavascriptExecutor) driver;
         //scroll down 250 pixels
 //        x, y offset
-        driver.navigate().refresh();
-       // BrowserUtils.wait(5);
-
-        for (int i=0; i <10; i++){
-            driver.executeScript("window.scrollBy(0, 250)");
-            BrowserUtils.wait(1);
-        }
+       for (int i=0; i < 10; i++){
+           driver.executeScript("window.scrollBy(0, 250)");
+           BrowserUtils.wait(1);
+       }
 
         BrowserUtils.wait(3);
     }
@@ -52,7 +49,6 @@ public class JSExecutor {
     public void scrollToElementTest(){
         driver.get("http://practice.cybertekschool.com/");
         driver.manage().window().maximize();
-
         BrowserUtils.wait(2);
         WebElement link = driver.findElement(By.linkText("Cybertek School"));
         //scrollIntoView - javascript method

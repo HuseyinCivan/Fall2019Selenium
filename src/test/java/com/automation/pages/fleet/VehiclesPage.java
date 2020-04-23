@@ -12,11 +12,8 @@ public class VehiclesPage extends AbstractPageBase {
     private WebElement createCar;
 
 
-
-
     public void clickToCreateCar(){
-        WebDriverWait wait = new WebDriverWait(driver,10);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(createCar)).click();
     }
-
 }

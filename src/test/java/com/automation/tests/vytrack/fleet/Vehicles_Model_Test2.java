@@ -1,13 +1,12 @@
 package com.automation.tests.vytrack.fleet;
 
 import com.automation.pages.LoginPage;
-import com.automation.pages.fleet.VehiclesPage;
 import com.automation.pages.fleet.Vehicles_Model;
 import com.automation.tests.vytrack.AbstractTestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Vehicles_Model_Test extends AbstractTestBase {
+public class Vehicles_Model_Test2 extends AbstractTestBase {
 
     @Test
     public void editTest(){

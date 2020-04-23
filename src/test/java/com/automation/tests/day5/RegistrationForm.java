@@ -10,40 +10,34 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 
 public class RegistrationForm {
+
     public static void main(String[] args) {
-
         WebDriverManager.chromedriver().version("79").setup();
-        WebDriver driver=new ChromeDriver();
-
+        WebDriver driver = new ChromeDriver();
         driver.get("http://practice.cybertekschool.com/registration_form");
         BrowserUtils.wait(5);
-
+        //enter first name
         driver.findElement(By.name("firstname")).sendKeys("John");
         driver.findElement(By.name("lastname")).sendKeys("Smith");
-        driver.findElement(By.name("username")).sendKeys("jSmith");
+        driver.findElement(By.name("username")).sendKeys("jsmith");
         driver.findElement(By.name("email")).sendKeys("jsmith@email.com");
         driver.findElement(By.name("password")).sendKeys("supersecretpassword2020");
         driver.findElement(By.name("phone")).sendKeys("571-343-2342");
 
         List<WebElement> genders = driver.findElements(By.name("gender"));
         //select gender
-        genders.get(0).click();
+        genders.get(0).click();//select male, for example
 
         driver.findElement(By.name("birthday")).sendKeys("01/01/2007");
 
-        driver.findElement(By.id("inlineCheckbox2")).click();
+        driver.findElement(By.id("inlineCheckbox2")).click();//select java
+
+        BrowserUtils.wait(2);
+        driver.findElement(By.id("wooden_spoon")).click();//click on submit button
         BrowserUtils.wait(2);
 
-        driver.findElement(By.id("wooden_spoon")).click();
-        BrowserUtils.wait(2);
 
-        String wellDone=driver.findElement(By.tagName("h4")).getText();
-        if(wellDone.equals("Well done!")){
-            System.out.println("PASSED");
-        }else{
-            System.out.println("FAILED");
-        }
-
+        //ADD VALIDATION PART
 
         driver.quit();
 

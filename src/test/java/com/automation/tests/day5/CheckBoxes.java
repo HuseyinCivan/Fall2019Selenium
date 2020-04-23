@@ -11,36 +11,33 @@ import java.util.List;
 
 public class CheckBoxes {
     public static void main(String[] args) {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver=new ChromeDriver();
-
+        WebDriverManager.chromedriver().version("79").setup();
+        WebDriver driver = new ChromeDriver();
         driver.get("http://practice.cybertekschool.com/checkboxes");
+
         BrowserUtils.wait(5);
-
-
+        //<input type="checkbox" checked="">
         List<WebElement> checkBoxes = driver.findElements(By.tagName("input"));
 
-       // checkBoxes.get(0).click();
+//        checkBoxes.get(0).click(); // click on first checkbox
 
         BrowserUtils.wait(2);
 
-        //go over collections checkboxes
+        //go over collection of checkboxes
+        for(int i=0; i<checkBoxes.size(); i++) {
+            //       if visible,                            eligible to click  and         not clicked yet
+            if (checkBoxes.get(i).isDisplayed() && checkBoxes.get(i).isEnabled() && (!checkBoxes.get(i).isSelected())) {
 
-        for(int x=0; x<checkBoxes.size();x++){
+                //if checkbox is not selected, click on it
+                checkBoxes.get(i).click(); // click on the checkbox
+                System.out.println(i+1 +" checkbox clicked!");
+            } else{
 
-            if(!checkBoxes.get(x).isSelected() && checkBoxes.get(x).isEnabled() && checkBoxes.get(x).isDisplayed() ){
-                checkBoxes.get(x).click();
-                System.out.println((x+1) + " checked box was clicked ! " );
-
-            }else{
-                System.out.println((x+1) + " checked box was not clicked ! " );
+                System.out.println(i+1 +" checkbox wasn't clicked!");
             }
+
         }
-
-
-
         BrowserUtils.wait(2);
-
-     driver.quit();
+        driver.quit();
     }
 }

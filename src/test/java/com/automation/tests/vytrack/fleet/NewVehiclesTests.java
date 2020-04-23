@@ -11,18 +11,16 @@ public class NewVehiclesTests extends AbstractTestBase {
 
     @Test
     public void verifyTitle(){
-        LoginPage loginpage = new LoginPage();
-        VehiclesPage vehiclesPage= new VehiclesPage();
+        LoginPage loginPage = new LoginPage();
+        VehiclesPage vehiclesPage = new VehiclesPage();
 
-        loginpage.login();
-        vehiclesPage.navigateTo("Fleet","Vehicles");
+        loginPage.login();
+        vehiclesPage.navigateTo("Fleet", "Vehicles");
 
-        String expected = "All - Car - Entities - System - Car - Entities - System";
+        String expectedTitle = "All - Car - Entities - System - Car - Entities - System";
         String actualTitle = Driver.getDriver().getTitle();
 
-        Assert.assertEquals(actualTitle,expected);
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
-
-
 
 }

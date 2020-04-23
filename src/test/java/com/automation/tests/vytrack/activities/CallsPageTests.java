@@ -1,14 +1,5 @@
 package com.automation.tests.vytrack.activities;
 
-
-/*
-Scenario: Verify for store manager
-Login as story manager
-Go to Activities --> Calls
-Verify that Log Call button is displayed
-
- */
-
 import com.automation.utilities.BrowserUtils;
 import com.automation.utilities.DriverFactory;
 import org.openqa.selenium.By;
@@ -22,57 +13,60 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CallsPageTests {
-private By usernameBy = By.id("prependedInput");
-private By passwordBy=By.id("prependedInput2");
 
-private WebDriver driver;
-private Actions action;
+    private By usernameBy = By.id("prependedInput");
+    private By passwordBy = By.id("prependedInput2");
+    private WebDriver driver;
+    private Actions actions;
 
-private String username = "storemanager85";
-private String password = "UserUser123";
-
-private By activitiesBy=By.xpath("//span[@class=\"title title-level-1\" and contains(text(),\"Activities\")]");
-
-private By logCallBynBy=By.cssSelector("a[title=\"Log call\"]");
+    private String storeManagerUserName="storemanager85";
+    private String storeManagerPassword="UserUser123";
+    private By activitiesBy = By.xpath("//span[@class='title title-level-1' and contains(text(),'Activities')]");
+    private By logCallBtnBy = By.cssSelector("a[title='Log call']");
 
 
-@BeforeMethod
+    @BeforeMethod
     public void setup(){
-      driver= DriverFactory.createDriver("chrome");
-      driver.get("https://qa2.vytrack.com/user/login");
-      driver.manage().window().maximize();
-      action=new Actions(driver);
+        driver = DriverFactory.createDriver("chrome");
+        driver.get("https://qa2.vytrack.com/user/login");
+        driver.manage().window().maximize();
 
-      BrowserUtils.wait(3);
+        actions = new Actions(driver);
 
-      driver.findElement(usernameBy).sendKeys(username);
-      driver.findElement(passwordBy).sendKeys(password, Keys.ENTER);
+        BrowserUtils.wait(3);
 
-      BrowserUtils.wait(5);
-      action.moveToElement(driver.findElement(activitiesBy)).perform();
-    BrowserUtils.wait(2);
+        driver.findElement(usernameBy).sendKeys(storeManagerUserName);
+        driver.findElement(passwordBy).sendKeys(storeManagerPassword, Keys.ENTER);
 
-    driver.findElement(By.linkText("Calls")).click();
-    BrowserUtils.wait(5);
+        BrowserUtils.wait(5);
 
-}
-@Test
-public void verifyLogButton(){
+        //hover over Activities
+        actions.moveToElement(driver.findElement(activitiesBy)).perform();
 
-    WebElement logCallBtnElement = driver.findElement(logCallBynBy);
-    Assert.assertTrue(logCallBtnElement.isDisplayed());
+        BrowserUtils.wait(2);
 
+        driver.findElement(By.linkText("Calls")).click();
 
-}
+        BrowserUtils.wait(5);
+    }
 
+    /**
+     * Scenario: Verify for store manager
+     *
+     * Login as story manager
+     * Go to Activities --> Calls
+     * Verify that Log Call button is displayed
+     */
+    @Test
+    public void verifyLogCallButton(){
+        WebElement logCallBtnElement = driver.findElement(logCallBtnBy);
+        Assert.assertTrue(logCallBtnElement.isDisplayed());
+    }
 
-
-
-@AfterMethod
+    @AfterMethod
     public void teardown(){
-    driver.quit();
-}
-
+        driver.quit();
+    }
 
 
 }

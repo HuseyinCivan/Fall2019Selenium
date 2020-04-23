@@ -4,26 +4,20 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class BasicTestNGTests {
-
-    @BeforeSuite
-    public void beforeSuit(){
-        System.out.println("BEFORE SUITE");
-    }
-
-    @AfterSuite
-    public void afterSuite(){
-        System.out.println("AFTER SUITE");
-    }
-
-    //runs only onece @Beforeclass and @BeforeMethod
+    //runs only once before @BeforeClass and @BeforeMethod
     @BeforeTest
     public void beforeTest(){
         System.out.println("BEFORE TEST");
     }
 
+    //runs only once after @AfterClass after @AfterMethod
+    @AfterTest
+    public void afterTest(){
+        System.out.println("AFTER TEST");
+    }
 
-    //runs only once in the class before method and before any test
-    //regardless on number of test it runs only once
+    //Runs only once in the class before @beforemethod and before any test
+    //regardless on number of tests, it runs only once
     @BeforeClass
     public void beforeClass(){
         //something that should be done only once in the class before all tests
@@ -36,37 +30,34 @@ public class BasicTestNGTests {
         System.out.println("AFTER CLASS");
     }
 
-
-    //runs before everytest automatically
+    //runs before every test automatically
     //works as a pre-condition or setup
     @BeforeMethod
     public void setup(){
         System.out.println("BEFORE METHOD");
     }
 
-    //runs automatically after test
+    //runs automatically after every test
     @AfterMethod
     public void teardown(){
         System.out.println("AFTER METHOD");
     }
 
-   @Test
-    public void test1(){
-       System.out.println("TEST1");
-        String expected="apple";
-        String actual="apple";
-        Assert.assertEquals(actual,expected);
-
-    }
     @Test
-    public void test2(){
-        System.out.println("TEST2");
-        int num1=5;
-       int num2=10;
-       //it calls hard assertion
-        //if assertion fails - it stops the execution (due to exception)
-       Assert.assertTrue(num1<num2);
+    public void test1() {
+        System.out.println("TEST 1");
+        String expected = "apple";
+        String actual = "apple";
+        Assert.assertEquals(actual, expected);
     }
 
-
+    @Test
+    public void test2() {
+        System.out.println("TEST 2");
+        int num1 = 5;
+        int num2 = 10;
+        //it calls hard assertion.
+        //if assertion fails - it stops the execution (due to exception).
+        Assert.assertTrue(num1 < num2);
+    }
 }

@@ -16,14 +16,14 @@ public class JSExecutor2 {
     private WebDriver driver;
 
     @BeforeMethod
-    public void setup(){
+    public void setup() {
         driver = DriverFactory.createDriver("chrome");
         driver.get("http://practice.cybertekschool.com/");
         driver.manage().window().maximize();
     }
 
     @Test
-    public void verifyTitle(){
+    public void verifyTitle() {
         String expected = "Practice";
         //we create javascriptexecutor object by casting webdriver object
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -67,10 +67,10 @@ public class JSExecutor2 {
     }
 
     @Test
-    public void textInputTest(){
+    public void textInputTest() {
         //
         driver.findElement(By.linkText("Form Authentication")).click();
-        BrowserUtils.wait(3);
+        BrowserUtils.wait(5);
 
         WebElement username = driver.findElement(By.name("username"));
         WebElement password = driver.findElement(By.name("password"));
@@ -79,8 +79,8 @@ public class JSExecutor2 {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //to get text from input box - read attribute "value"
         //to enter text - set attribute "value"
-
-        js.executeScript("arguments[0].setAttribute('value', 'tomsmith')" , username);
+        //.setAttribute('value', 'text') - enter some text
+        js.executeScript("arguments[0].setAttribute('value', 'tomsmith')", username);
         js.executeScript("arguments[0].setAttribute('value', 'SuperSecretPassword')", password);
         js.executeScript("arguments[0].click()", loginbtn);
 
@@ -88,28 +88,27 @@ public class JSExecutor2 {
         String expected = "Welcome to the Secure Area. When you are done click logout below.";
         String subheader = js.executeScript("return document.getElementsByClassName('subheader')[0].textContent").toString();
 
-        Assert.assertEquals(subheader,expected);
+
+        Assert.assertEquals(subheader, expected);
     }
 
     @Test
-    public void scrollToElement(){
-        //href = link ,URL
-        WebElement link=driver.findElement(By.linkText("Cybertek School"));
+    public void scrollToElement() {
+        BrowserUtils.wait(5);
 
-        JavascriptExecutor js= (JavascriptExecutor) driver;
+        //href = link, URL
+        WebElement link = driver.findElement(By.linkText("Cybertek School"));
 
-        js.executeScript("arguments[0].scrollIntoView(true)",link);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
-
-
+        js.executeScript("arguments[0].scrollIntoView(true)", link);
     }
+
     @Test
-    public void scrollTest(){
+    public void scrollTest() {
         driver.navigate().to("http://practice.cybertekschool.com/infinite_scroll");
-
-        JavascriptExecutor js= (JavascriptExecutor) driver;
-
-        for (int x = 0; x < 15; x++) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        for (int i = 0; i < 15; i++) {
             js.executeScript("window.scrollBy(0, 1000)");
             BrowserUtils.wait(1);
         }
@@ -117,9 +116,8 @@ public class JSExecutor2 {
     }
 
 
-
     @AfterMethod
-    public void teardown(){
+    public void teardown() {
         BrowserUtils.wait(2);
         driver.quit();
     }
